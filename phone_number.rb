@@ -11,9 +11,8 @@ class PhoneNumber
     return WRONG_NUMBER if contains_letters?
     digits = phone_string.gsub(/\D/, '')
     return WRONG_NUMBER unless digits.size.between? 10, 11
-    if digits.size == 11
-      return digits[0] == '1' ? digits[1..-1] : WRONG_NUMBER
-    end
+    return WRONG_NUMBER if digits.size == 11 && digits[0] != '1'
+    return digits[1..-1] if digits.size == 11 && digits[0] == '1'
     digits
   end
 
